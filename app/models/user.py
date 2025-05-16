@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime
+from sqlalchemy import Column, Integer, String
 from app.db.database import Base
 
 class User(Base):
@@ -8,4 +8,3 @@ class User(Base):
     username = Column(String, nullable=False)
     password = Column(String, nullable=False)
     name = Column(String, nullable=False)
-    created_at = Column(DateTime, nullable=False)
