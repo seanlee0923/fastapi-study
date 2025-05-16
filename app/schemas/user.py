@@ -6,7 +6,9 @@ class UserBase(BaseModel):
     name: str
 
 class UserCreate(UserBase):
-    pass
+    username: str
+    password: str
+    name: str
 
 class User(UserBase):
     id: int
@@ -16,4 +18,3 @@ class User(UserBase):
 
     class Config:
         orm_mode = True
-    
