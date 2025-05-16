@@ -23,14 +23,13 @@ def sign_up(user: schema.UserCreate, db: Session = Depends(get_db)):
     return crud.create_user(db,user)
 
 
-@router.get("/sign-in", response_model=None)
+@router.post("/sign-in")
 def sign_in(user: schema.UserLogin, db: Session = Depends(get_db)):
     existing_user = crud.get_user_by_username(db,user.username)
     if not existing_user:
-        raise HTTPException(status_code=http.HTTPStatus.CONFLICT, detail="Wrong username or password")
+        raise HTTPException(status_code=http.HTTPStatus.UNAUTHORIZED, detail="Wrong username or password1")
 
     login_result = crud.login_user(existing_user, user.password)
     if not login_result.Status:
-        raise HTTPException(status_code=http.HTTPStatus.CONFLICT, detail="Wrong username or password")
-
-    return {"result": True, "token": login_result.access_token}
+        raise HTTPException(status_code=http.HTTPStatus.UNAUTHORIZED, detail="Wrong username or password2")
+    return {"result": True, "token": login_result.token}
